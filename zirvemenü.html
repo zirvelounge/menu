@@ -1,0 +1,653 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Zirve Lounge Premium Menü</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            /* Mekana ve Logoya Özel Renk Paleti */
+            --bg-body: #f7f5f0; 
+            --bg-header: #141416; 
+            --card-bg: #ffffff; 
+            --text-main: #2b2b2b; 
+            --text-muted: #737373; 
+            --accent-burgundy: #7a1b29; 
+            --accent-gold: #c2a359; 
+            --card-shadow: rgba(0, 0, 0, 0.06);
+            --card-border: rgba(0, 0, 0, 0.03);
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            -webkit-tap-highlight-color: transparent;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            background-color: var(--bg-body);
+            color: var(--text-main);
+            line-height: 1.5;
+            padding-bottom: 90px;
+            min-height: 100vh;
+        }
+
+        /* Header (Logo Alanı) */
+        .header {
+            text-align: center;
+            padding: 40px 20px 30px;
+            background: linear-gradient(to bottom, #0a0a0a, var(--bg-header));
+            border-bottom: 3px solid var(--accent-burgundy);
+            position: relative;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.15);
+        }
+        
+        .logo-image {
+            max-width: 180px;
+            height: auto;
+            display: block;
+            margin: 0 auto;
+            filter: drop-shadow(0 10px 15px rgba(0,0,0,0.5));
+        }
+
+        /* 3D Yüzen Kategori Menüsü (Açık Tema) */
+        .category-nav {
+            position: sticky;
+            top: 15px;
+            margin: 0 15px 25px;
+            background: rgba(255, 255, 255, 0.85);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            z-index: 100;
+            display: flex;
+            overflow-x: auto;
+            padding: 8px;
+            gap: 10px;
+            border-radius: 50px;
+            box-shadow: 0 8px 25px rgba(0,0,0,0.08);
+            border: 1px solid rgba(255,255,255,0.5);
+            scrollbar-width: none;
+        }
+
+        .category-nav::-webkit-scrollbar {
+            display: none;
+        }
+
+        .nav-btn {
+            background: transparent;
+            color: var(--text-muted);
+            border: none;
+            padding: 10px 20px;
+            border-radius: 40px;
+            font-size: 0.95rem;
+            font-weight: 500;
+            white-space: nowrap;
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .nav-btn.active {
+            background: var(--accent-burgundy);
+            color: #ffffff;
+            font-weight: 600;
+            box-shadow: 0 4px 12px rgba(122, 27, 41, 0.3);
+        }
+
+        .nav-btn i {
+            font-size: 1.1rem;
+        }
+
+        /* Menü İçeriği */
+        .menu-container {
+            padding: 0 15px;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .category-section {
+            padding-top: 15px;
+            margin-bottom: 40px;
+            scroll-margin-top: 100px;
+        }
+
+        .category-title {
+            font-size: 1.4rem;
+            color: var(--bg-header);
+            margin-bottom: 15px;
+            font-weight: 700;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            padding-left: 5px;
+        }
+
+        .category-title i {
+            color: var(--accent-gold);
+        }
+
+        /* 3D Modern Kart Tasarımı */
+        .menu-list {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+
+        .menu-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 16px 20px;
+            background: var(--card-bg);
+            border-radius: 18px;
+            border: 1px solid var(--card-border);
+            box-shadow: 0 6px 16px var(--card-shadow);
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .menu-item:active {
+            transform: scale(0.97) translateY(2px);
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
+            background: #fcfcfc;
+        }
+
+        .item-info {
+            display: flex;
+            flex-direction: column;
+            flex: 1;
+            padding-right: 15px;
+        }
+
+        .item-name {
+            font-size: 1.1rem;
+            font-weight: 600;
+            color: var(--text-main);
+        }
+
+        .item-desc {
+            font-size: 0.8rem;
+            color: var(--text-muted);
+            margin-top: 4px;
+            line-height: 1.3;
+        }
+
+        .item-price {
+            font-size: 1.25rem;
+            font-weight: 700;
+            color: var(--accent-burgundy);
+            white-space: nowrap;
+            background: rgba(122, 27, 41, 0.05);
+            padding: 6px 14px;
+            border-radius: 12px;
+        }
+        
+        /* Yukarı Çık Butonu */
+        .fab-button {
+            position: fixed;
+            bottom: 25px;
+            right: 20px;
+            background: var(--accent-burgundy);
+            color: #ffffff;
+            width: 55px;
+            height: 55px;
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            box-shadow: 0 8px 20px rgba(122, 27, 41, 0.4);
+            z-index: 1000;
+            font-size: 1.5rem;
+            text-decoration: none;
+            transition: transform 0.2s ease;
+        }
+
+        .fab-button:active {
+            transform: scale(0.9);
+        }
+    </style>
+</head>
+<body>
+
+    <header class="header">
+        <img src="Zirve_logo.png" alt="Zirve Lounge Logo" class="logo-image">
+    </header>
+
+    <!-- Kaydırılabilir Kategori Menüsü -->
+    <nav class="category-nav" id="navBar">
+        <a href="#sicak-icecekler" class="nav-btn active" data-target="sicak-icecekler">
+            <i class="fa-solid fa-mug-hot"></i> Sıcak İçecekler
+        </a>
+        <a href="#soguk-icecekler" class="nav-btn" data-target="soguk-icecekler">
+            <i class="fa-solid fa-glass-water"></i> Soğuk İçecekler
+        </a>
+        <a href="#yiyecekler" class="nav-btn" data-target="yiyecekler">
+            <i class="fa-solid fa-burger"></i> Yiyecekler
+        </a>
+        <a href="#tatlilar" class="nav-btn" data-target="tatlilar">
+            <i class="fa-solid fa-cake-candles"></i> Tatlılar
+        </a>
+    </nav>
+
+    <main class="menu-container">
+        
+        <!-- SICAK İÇECEKLER (Ucuzdan Pahalıya) -->
+        <section id="sicak-icecekler" class="category-section">
+            <h2 class="category-title"><i class="fa-solid fa-mug-hot"></i> Sıcak İçecekler</h2>
+            <div class="menu-list">
+                <div class="menu-item">
+                    <div class="item-info">
+                        <span class="item-name">Çay</span>
+                    </div>
+                    <span class="item-price">20₺</span>
+                </div>
+                <div class="menu-item">
+                    <div class="item-info">
+                        <span class="item-name">Mırra (Acı)</span>
+                    </div>
+                    <span class="item-price">20₺</span>
+                </div>
+                <div class="menu-item">
+                    <div class="item-info">
+                        <span class="item-name">Oralet</span>
+                    </div>
+                    <span class="item-price">20₺</span>
+                </div>
+                <div class="menu-item">
+                    <div class="item-info">
+                        <span class="item-name">3 Ü 1 Arada</span>
+                    </div>
+                    <span class="item-price">40₺</span>
+                </div>
+                <div class="menu-item">
+                    <div class="item-info">
+                        <span class="item-name">Süt</span>
+                    </div>
+                    <span class="item-price">50₺</span>
+                </div>
+                <div class="menu-item">
+                    <div class="item-info">
+                        <span class="item-name">Menengiç</span>
+                    </div>
+                    <span class="item-price">70₺</span>
+                </div>
+                <div class="menu-item">
+                    <div class="item-info">
+                        <span class="item-name">Salep</span>
+                    </div>
+                    <span class="item-price">70₺</span>
+                </div>
+                <div class="menu-item">
+                    <div class="item-info">
+                        <span class="item-name">Bitki Çayları</span>
+                    </div>
+                    <span class="item-price">75₺</span>
+                </div>
+                <div class="menu-item">
+                    <div class="item-info">
+                        <span class="item-name">Ballı Süt</span>
+                    </div>
+                    <span class="item-price">80₺</span>
+                </div>
+                <div class="menu-item">
+                    <div class="item-info">
+                        <span class="item-name">Latte</span>
+                    </div>
+                    <span class="item-price">80₺</span>
+                </div>
+                <div class="menu-item">
+                    <div class="item-info">
+                        <span class="item-name">Cafe Latte</span>
+                    </div>
+                    <span class="item-price">90₺</span>
+                </div>
+                <div class="menu-item">
+                    <div class="item-info">
+                        <span class="item-name">Filtre Kahve</span>
+                    </div>
+                    <span class="item-price">90₺</span>
+                </div>
+                <div class="menu-item">
+                    <div class="item-info">
+                        <span class="item-name">Sade Nescafe</span>
+                    </div>
+                    <span class="item-price">90₺</span>
+                </div>
+                <div class="menu-item">
+                    <div class="item-info">
+                        <span class="item-name">Sıcak Çikolata</span>
+                    </div>
+                    <span class="item-price">90₺</span>
+                </div>
+                <div class="menu-item">
+                    <div class="item-info">
+                        <span class="item-name">Sütlü Nescafe</span>
+                    </div>
+                    <span class="item-price">90₺</span>
+                </div>
+                <div class="menu-item">
+                    <div class="item-info">
+                        <span class="item-name">Americano</span>
+                    </div>
+                    <span class="item-price">100₺</span>
+                </div>
+                <div class="menu-item">
+                    <div class="item-info">
+                        <span class="item-name">Türk Kahvesi</span>
+                        <span class="item-desc">Özel kavrulmuş çekirdeklerden</span>
+                    </div>
+                    <span class="item-price">100₺</span>
+                </div>
+                <div class="menu-item">
+                    <div class="item-info">
+                        <span class="item-name">Espresso</span>
+                    </div>
+                    <span class="item-price">120₺</span>
+                </div>
+            </div>
+        </section>
+
+        <!-- SOĞUK İÇECEKLER -->
+        <section id="soguk-icecekler" class="category-section">
+            <h2 class="category-title"><i class="fa-solid fa-glass-water"></i> Soğuk İçecekler</h2>
+            <div class="menu-list">
+                <div class="menu-item">
+                    <div class="item-info">
+                        <span class="item-name">Su</span>
+                    </div>
+                    <span class="item-price">20₺</span>
+                </div>
+                <div class="menu-item">
+                    <div class="item-info">
+                        <span class="item-name">Ayran</span>
+                    </div>
+                    <span class="item-price">40₺</span>
+                </div>
+                <div class="menu-item">
+                    <div class="item-info">
+                        <span class="item-name">Gazoz</span>
+                    </div>
+                    <span class="item-price">50₺</span>
+                </div>
+                <div class="menu-item">
+                    <div class="item-info">
+                        <span class="item-name">Soda</span>
+                    </div>
+                    <span class="item-price">50₺</span>
+                </div>
+                <div class="menu-item">
+                    <div class="item-info">
+                        <span class="item-name">Coca Cola Cam</span>
+                    </div>
+                    <span class="item-price">60₺</span>
+                </div>
+                <div class="menu-item">
+                    <div class="item-info">
+                        <span class="item-name">Fanta Cam</span>
+                    </div>
+                    <span class="item-price">60₺</span>
+                </div>
+                <div class="menu-item">
+                    <div class="item-info">
+                        <span class="item-name">Şalgam</span>
+                    </div>
+                    <span class="item-price">60₺</span>
+                </div>
+                <div class="menu-item">
+                    <div class="item-info">
+                        <span class="item-name">Avşar Meyveli Soda</span>
+                    </div>
+                    <span class="item-price">75₺</span>
+                </div>
+                <div class="menu-item">
+                    <div class="item-info">
+                        <span class="item-name">Cappy Kutu</span>
+                    </div>
+                    <span class="item-price">80₺</span>
+                </div>
+                <div class="menu-item">
+                    <div class="item-info">
+                        <span class="item-name">Churchill</span>
+                    </div>
+                    <span class="item-price">80₺</span>
+                </div>
+                <div class="menu-item">
+                    <div class="item-info">
+                        <span class="item-name">Coca Cola Kutu</span>
+                    </div>
+                    <span class="item-price">80₺</span>
+                </div>
+                <div class="menu-item">
+                    <div class="item-info">
+                        <span class="item-name">Fuse Tea Kutu</span>
+                    </div>
+                    <span class="item-price">80₺</span>
+                </div>
+                <div class="menu-item">
+                    <div class="item-info">
+                        <span class="item-name">Sprite Kutu</span>
+                    </div>
+                    <span class="item-price">80₺</span>
+                </div>
+                <div class="menu-item">
+                    <div class="item-info">
+                        <span class="item-name">Limonata</span>
+                    </div>
+                    <span class="item-price">100₺</span>
+                </div>
+                <div class="menu-item">
+                    <div class="item-info">
+                        <span class="item-name">Sıkma Portakal</span>
+                    </div>
+                    <span class="item-price">100₺</span>
+                </div>
+                <div class="menu-item">
+                    <div class="item-info">
+                        <span class="item-name">Enerji İçeceği</span>
+                    </div>
+                    <span class="item-price">100₺</span>
+                </div>
+                <div class="menu-item">
+                    <div class="item-info">
+                        <span class="item-name">Milkshake</span>
+                    </div>
+                    <span class="item-price">120₺</span>
+                </div>
+                <div class="menu-item">
+                    <div class="item-info">
+                        <span class="item-name">Fındıklı Portakal</span>
+                    </div>
+                    <span class="item-price">125₺</span>
+                </div>
+                <div class="menu-item">
+                    <div class="item-info">
+                        <span class="item-name">Atom</span>
+                    </div>
+                    <span class="item-price">150₺</span>
+                </div>
+                <div class="menu-item">
+                    <div class="item-info">
+                        <span class="item-name">Kokteyl</span>
+                        <span class="item-desc">Mekanımıza özel spesiyal karışım</span>
+                    </div>
+                    <span class="item-price">150₺</span>
+                </div>
+                <div class="menu-item">
+                    <div class="item-info">
+                        <span class="item-name">Karışık Atom</span>
+                        <span class="item-desc">Taze meyvelerle hazırlanmış enerji deposu</span>
+                    </div>
+                    <span class="item-price">200₺</span>
+                </div>
+            </div>
+        </section>
+
+        <!-- YİYECEKLER -->
+        <section id="yiyecekler" class="category-section">
+            <h2 class="category-title"><i class="fa-solid fa-burger"></i> Yiyecekler</h2>
+            <div class="menu-list">
+                <div class="menu-item">
+                    <div class="item-info">
+                        <span class="item-name">Zirve Tabak</span>
+                        <span class="item-desc">Patates kızartması, soğan halkası ve soslar</span>
+                    </div>
+                    <span class="item-price">150₺</span>
+                </div>
+                <div class="menu-item">
+                    <div class="item-info">
+                        <span class="item-name">Atıştırmalık</span>
+                    </div>
+                    <span class="item-price">50₺</span>
+                </div>
+                <div class="menu-item">
+                    <div class="item-info">
+                        <span class="item-name">Dondurma</span>
+                    </div>
+                    <span class="item-price">70₺</span>
+                </div>
+                <div class="menu-item">
+                    <div class="item-info">
+                        <span class="item-name">Karışık Çerez</span>
+                        
+                    </div>
+                    <span class="item-price">100₺</span>
+                </div>
+                <div class="menu-item">
+                    <div class="item-info">
+                        <span class="item-name">Yarım Tost</span>
+                        <span class="item-desc">Karışık, Kaşarlı, Sucuklu</span>
+                    </div>
+                    <span class="item-price">100₺</span>
+                </div>
+                <div class="menu-item">
+                    <div class="item-info">
+                        <span class="item-name">Sigara Böreği</span>
+                    </div>
+                    <span class="item-price">140₺</span>
+                </div>
+                
+                <div class="menu-item">
+                    <div class="item-info">
+                        <span class="item-name">Kaşarlı Tost</span>
+                    </div>
+                    <span class="item-price">150₺</span>
+                </div>
+                <div class="menu-item">
+                    <div class="item-info">
+                        <span class="item-name">Sucuklu Tost</span>
+                    </div>
+                    <span class="item-price">150₺</span>
+                </div>
+                <div class="menu-item">
+                    <div class="item-info">
+                        <span class="item-name">Karışık Tost</span>
+                        
+                    </div>
+                    <span class="item-price">200₺</span>
+                </div>
+                <div class="menu-item">
+                    <div class="item-info">
+                        <span class="item-name">Hamburger</span>
+                        <span class="item-desc">Özel ekmeği ve enfes sosuyla, yanında patates kızartması</span>
+                    </div>
+                    <span class="item-price">250₺</span>
+                </div>
+                <div class="menu-item">
+                    <div class="item-info">
+                        <span class="item-name">Pizza</span>
+                    </div>
+                    <span class="item-price">250₺</span>
+                </div>
+                <div class="menu-item">
+                    <div class="item-info">
+                        <span class="item-name">Izgara Köfte</span>
+                    </div>
+                    <span class="item-price">275₺</span>
+                </div>
+            </div>
+        </section>
+
+        <!-- TATLILAR -->
+        <section id="tatlilar" class="category-section">
+            <h2 class="category-title"><i class="fa-solid fa-cake-candles"></i> Tatlılar</h2>
+            <div class="menu-list">
+                <div class="menu-item">
+                    <div class="item-info">
+                        <span class="item-name">Fıstık Rüyası</span>
+                    </div>
+                    <span class="item-price">200₺</span>
+                </div>
+                <div class="menu-item">
+                    <div class="item-info">
+                        <span class="item-name">Çikolatalı Orman Meyveli Pasta</span>
+                    </div>
+                    <span class="item-price">200₺</span>
+                </div>
+                <div class="menu-item">
+                    <div class="item-info">
+                        <span class="item-name">Lotus</span>
+                    </div>
+                    <span class="item-price">200₺</span>
+                </div>
+                <div class="menu-item">
+                    <div class="item-info">
+                        <span class="item-name">Biscoff Bella Cocostar</span>
+                    </div>
+                    <span class="item-price">200₺</span>
+                </div>
+            </div>
+        </section>
+
+    </main>
+    
+    <a href="#" class="fab-button" aria-label="Yukarı Çık">
+        <i class="fa-solid fa-chevron-up"></i>
+    </a>
+
+    <script>
+        // Smooth Scroll & Aktif Menü Butonu Yönetimi
+        const navBtns = document.querySelectorAll('.nav-btn');
+        const sections = document.querySelectorAll('.category-section');
+
+        navBtns.forEach(btn => {
+            btn.addEventListener('click', function(e) {
+                e.preventDefault();
+                const targetId = this.getAttribute('data-target');
+                const targetSection = document.getElementById(targetId);
+                
+                window.scrollTo({
+                    top: targetSection.offsetTop - 80,
+                    behavior: 'smooth'
+                });
+                
+                this.scrollIntoView({ behavior: 'smooth', inline: 'center', block: 'nearest' });
+            });
+        });
+
+        window.addEventListener('scroll', () => {
+            let current = '';
+            sections.forEach(section => {
+                const sectionTop = section.offsetTop;
+                if (pageYOffset >= (sectionTop - 120)) {
+                    current = section.getAttribute('id');
+                }
+            });
+
+            navBtns.forEach(btn => {
+                btn.classList.remove('active');
+                if (btn.getAttribute('data-target') === current) {
+                    btn.classList.add('active');
+                    btn.scrollIntoView({ behavior: 'smooth', inline: 'center', block: 'nearest' });
+                }
+            });
+        });
+    </script>
+</body>
+</html>
