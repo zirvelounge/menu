@@ -6,9 +6,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <script>
         // Tek yapılandırma sabiti: Hostinger API adresi.
-        // admin-panel klasörünü public_html içine yüklediyseniz aşağıdaki adres geçerlidir.
-        // admin-panel içeriğini doğrudan public_html kök dizinine yüklediyseniz sonunu /api/icerik.php yapın.
-        const ICERIK_API_URL = 'https://coherent-ivory-raccoon-33.hostingersite.com/admin-panel/api/icerik.php';
         // Dosyalar doğrudan public_html ana dizinine yüklendiği için aşağıdaki adres kullanılır.
         const ICERIK_API_URL = 'https://coherent-ivory-raccoon-33.hostingersite.com/api/icerik.php';
     </script>
@@ -951,6 +948,7 @@
                     const response = await fetch(ICERIK_API_URL.trim(), {
                         method: 'GET',
                         mode: 'cors',
+                        cache: 'no-cache',
                         headers: { Accept: 'application/json' },
                         signal: controller ? controller.signal : undefined
                     });
