@@ -1,22 +1,30 @@
 <!DOCTYPE html>
 <html lang="tr">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>Zirve Lounge Menü</title>
-    <link rel="icon" type="image/png" href="Zirve_logo.png">
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <script>
+        // Tek yapılandırma sabiti: Hostinger API adresi.
+        // admin-panel klasörünü public_html içine yüklediyseniz aşağıdaki adres geçerlidir.
+        // admin-panel içeriğini doğrudan public_html kök dizinine yüklediyseniz sonunu /api/icerik.php yapın.
+        const ICERIK_API_URL = 'https://coherent-ivory-raccoon-33.hostingersite.com/admin-panel/api/icerik.php';
+    </script>
+    <title data-key="genel_site_baslik">Zirve Lounge Menü</title>
+    <link rel="icon" type="image/png" href="Zirve_logo.png" data-key="genel_favicon_url">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap"
+        rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
         :root {
             /* Mekana ve Logoya Özel Renk Paleti */
-            --bg-body: #f7f5f0; 
-            --bg-header: #141416; 
-            --card-bg: #ffffff; 
-            --text-main: #2b2b2b; 
-            --text-muted: #737373; 
-            --accent-burgundy: #7a1b29; 
-            --accent-gold: #c2a359; 
+            --bg-body: #f7f5f0;
+            --bg-header: #141416;
+            --card-bg: #ffffff;
+            --text-main: #2b2b2b;
+            --text-muted: #737373;
+            --accent-burgundy: #7a1b29;
+            --accent-gold: #c2a359;
             --card-shadow: rgba(0, 0, 0, 0.06);
             --card-border: rgba(0, 0, 0, 0.03);
         }
@@ -44,15 +52,15 @@
             background: linear-gradient(to bottom, #0a0a0a, var(--bg-header));
             border-bottom: 3px solid var(--accent-burgundy);
             position: relative;
-            box-shadow: 0 4px 20px rgba(0,0,0,0.15);
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
         }
-        
+
         .logo-image {
             max-width: 180px;
             height: auto;
             display: block;
             margin: 0 auto;
-            filter: drop-shadow(0 10px 15px rgba(0,0,0,0.5));
+            filter: drop-shadow(0 10px 15px rgba(0, 0, 0, 0.5));
         }
 
         /* 3D Yüzen Kategori Menüsü (Açık Tema) */
@@ -69,8 +77,8 @@
             padding: 8px;
             gap: 10px;
             border-radius: 50px;
-            box-shadow: 0 8px 25px rgba(0,0,0,0.08);
-            border: 1px solid rgba(255,255,255,0.5);
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.08);
+            border: 1px solid rgba(255, 255, 255, 0.5);
             scrollbar-width: none;
         }
 
@@ -99,6 +107,7 @@
             color: #ffffff;
             font-weight: 600;
             box-shadow: 0 4px 12px rgba(122, 27, 41, 0.3);
+            box-shadow: 0 4px 12px color-mix(in srgb, var(--accent-burgundy) 30%, transparent);
         }
 
         .nav-btn i {
@@ -186,10 +195,11 @@
             color: var(--accent-burgundy);
             white-space: nowrap;
             background: rgba(122, 27, 41, 0.05);
+            background: color-mix(in srgb, var(--accent-burgundy) 7%, transparent);
             padding: 6px 14px;
             border-radius: 12px;
         }
-        
+
         /* Yukarı Çık Butonu */
         .fab-button {
             position: fixed;
@@ -204,6 +214,7 @@
             justify-content: center;
             align-items: center;
             box-shadow: 0 8px 20px rgba(122, 27, 41, 0.4);
+            box-shadow: 0 8px 20px color-mix(in srgb, var(--accent-burgundy) 40%, transparent);
             z-index: 1000;
             font-size: 1.5rem;
             text-decoration: none;
@@ -215,403 +226,404 @@
         }
     </style>
 </head>
+
 <body>
 
     <header class="header">
-        <img src="Zirve_logo.png" alt="Zirve Lounge Logo" class="logo-image">
+        <img src="Zirve_logo.png" alt="Zirve Lounge Logo" class="logo-image" data-key="genel_logo_url" data-alt-key="genel_logo_alt">
     </header>
 
     <!-- Kaydırılabilir Kategori Menüsü -->
     <nav class="category-nav" id="navBar">
         <a href="#sicak-icecekler" class="nav-btn active" data-target="sicak-icecekler">
-            <i class="fa-solid fa-mug-hot"></i> Sıcak İçecekler
+            <i class="fa-solid fa-mug-hot"></i> <span data-key="kat_sicak_baslik">Sıcak İçecekler</span>
         </a>
         <a href="#soguk-icecekler" class="nav-btn" data-target="soguk-icecekler">
-            <i class="fa-solid fa-glass-water"></i> Soğuk İçecekler
+            <i class="fa-solid fa-glass-water"></i> <span data-key="kat_soguk_baslik">Soğuk İçecekler</span>
         </a>
         <a href="#yiyecekler" class="nav-btn" data-target="yiyecekler">
-            <i class="fa-solid fa-burger"></i> Yiyecekler
+            <i class="fa-solid fa-burger"></i> <span data-key="kat_yiyecek_baslik">Yiyecekler</span>
         </a>
         <a href="#tatlilar" class="nav-btn" data-target="tatlilar">
-            <i class="fa-solid fa-cake-candles"></i> Tatlılar
+            <i class="fa-solid fa-cake-candles"></i> <span data-key="kat_tatli_baslik">Tatlılar</span>
         </a>
     </nav>
 
     <main class="menu-container">
-        
+
         <!-- SICAK İÇECEKLER (Ucuzdan Pahalıya) -->
         <section id="sicak-icecekler" class="category-section">
-            <h2 class="category-title"><i class="fa-solid fa-mug-hot"></i> Sıcak İçecekler</h2>
+            <h2 class="category-title"><i class="fa-solid fa-mug-hot"></i> <span data-key="kat_sicak_baslik">Sıcak İçecekler</span></h2>
             <div class="menu-list">
                 <div class="menu-item">
                     <div class="item-info">
-                        <span class="item-name">Çay</span>
+                        <span class="item-name" data-key="sicak_01_ad">Çay</span>
                     </div>
-                    <span class="item-price">20₺</span>
+                    <span class="item-price" data-key="sicak_01_fiyat">20₺</span>
                 </div>
                 <div class="menu-item">
                     <div class="item-info">
-                        <span class="item-name">Mırra (Acı)</span>
+                        <span class="item-name" data-key="sicak_02_ad">Mırra (Acı)</span>
                     </div>
-                    <span class="item-price">20₺</span>
+                    <span class="item-price" data-key="sicak_02_fiyat">20₺</span>
                 </div>
                 <div class="menu-item">
                     <div class="item-info">
-                        <span class="item-name">Oralet</span>
+                        <span class="item-name" data-key="sicak_03_ad">Oralet</span>
                     </div>
-                    <span class="item-price">20₺</span>
+                    <span class="item-price" data-key="sicak_03_fiyat">20₺</span>
                 </div>
                 <div class="menu-item">
                     <div class="item-info">
-                        <span class="item-name">3 Ü 1 Arada</span>
+                        <span class="item-name" data-key="sicak_04_ad">3 Ü 1 Arada</span>
                     </div>
-                    <span class="item-price">40₺</span>
+                    <span class="item-price" data-key="sicak_04_fiyat">40₺</span>
                 </div>
                 <div class="menu-item">
                     <div class="item-info">
-                        <span class="item-name">Süt</span>
+                        <span class="item-name" data-key="sicak_05_ad">Süt</span>
                     </div>
-                    <span class="item-price">50₺</span>
+                    <span class="item-price" data-key="sicak_05_fiyat">50₺</span>
                 </div>
                 <div class="menu-item">
                     <div class="item-info">
-                        <span class="item-name">Menengiç</span>
+                        <span class="item-name" data-key="sicak_06_ad">Menengiç</span>
                     </div>
-                    <span class="item-price">70₺</span>
+                    <span class="item-price" data-key="sicak_06_fiyat">70₺</span>
                 </div>
                 <div class="menu-item">
                     <div class="item-info">
-                        <span class="item-name">Salep</span>
+                        <span class="item-name" data-key="sicak_07_ad">Salep</span>
                     </div>
-                    <span class="item-price">70₺</span>
+                    <span class="item-price" data-key="sicak_07_fiyat">70₺</span>
                 </div>
                 <div class="menu-item">
                     <div class="item-info">
-                        <span class="item-name">Bitki Çayları</span>
+                        <span class="item-name" data-key="sicak_08_ad">Bitki Çayları</span>
                     </div>
-                    <span class="item-price">75₺</span>
+                    <span class="item-price" data-key="sicak_08_fiyat">75₺</span>
                 </div>
                 <div class="menu-item">
                     <div class="item-info">
-                        <span class="item-name">Ballı Süt</span>
+                        <span class="item-name" data-key="sicak_09_ad">Ballı Süt</span>
                     </div>
-                    <span class="item-price">80₺</span>
+                    <span class="item-price" data-key="sicak_09_fiyat">80₺</span>
                 </div>
                 <div class="menu-item">
                     <div class="item-info">
-                        <span class="item-name">Latte</span>
+                        <span class="item-name" data-key="sicak_10_ad">Latte</span>
                     </div>
-                    <span class="item-price">100₺</span>
+                    <span class="item-price" data-key="sicak_10_fiyat">100₺</span>
                 </div>
                 <div class="menu-item">
                     <div class="item-info">
-                        <span class="item-name">Cafe Latte</span>
+                        <span class="item-name" data-key="sicak_11_ad">Cafe Latte</span>
                     </div>
-                    <span class="item-price">100₺</span>
+                    <span class="item-price" data-key="sicak_11_fiyat">100₺</span>
                 </div>
                 <div class="menu-item">
                     <div class="item-info">
-                        <span class="item-name">Filtre Kahve</span>
+                        <span class="item-name" data-key="sicak_12_ad">Filtre Kahve</span>
                     </div>
-                    <span class="item-price">100₺</span>
+                    <span class="item-price" data-key="sicak_12_fiyat">100₺</span>
                 </div>
                 <div class="menu-item">
                     <div class="item-info">
-                        <span class="item-name">Sade Nescafe</span>
+                        <span class="item-name" data-key="sicak_13_ad">Sade Nescafe</span>
                     </div>
-                    <span class="item-price">100₺</span>
+                    <span class="item-price" data-key="sicak_13_fiyat">100₺</span>
                 </div>
                 <div class="menu-item">
                     <div class="item-info">
-                        <span class="item-name">Sıcak Çikolata</span>
+                        <span class="item-name" data-key="sicak_14_ad">Sıcak Çikolata</span>
                     </div>
-                    <span class="item-price">100₺</span>
+                    <span class="item-price" data-key="sicak_14_fiyat">100₺</span>
                 </div>
                 <div class="menu-item">
                     <div class="item-info">
-                        <span class="item-name">Sütlü Nescafe</span>
+                        <span class="item-name" data-key="sicak_15_ad">Sütlü Nescafe</span>
                     </div>
-                    <span class="item-price">100₺</span>
+                    <span class="item-price" data-key="sicak_15_fiyat">100₺</span>
                 </div>
                 <div class="menu-item">
                     <div class="item-info">
-                        <span class="item-name">Americano</span>
+                        <span class="item-name" data-key="sicak_16_ad">Americano</span>
                     </div>
-                    <span class="item-price">100₺</span>
+                    <span class="item-price" data-key="sicak_16_fiyat">100₺</span>
                 </div>
                 <div class="menu-item">
                     <div class="item-info">
-                        <span class="item-name">Türk Kahvesi</span>
-                        <span class="item-desc">Özel kavrulmuş çekirdeklerden</span>
+                        <span class="item-name" data-key="sicak_17_ad">Türk Kahvesi</span>
+                        <span class="item-desc" data-key="sicak_17_aciklama">Özel kavrulmuş çekirdeklerden</span>
                     </div>
-                    <span class="item-price">80₺</span>
+                    <span class="item-price" data-key="sicak_17_fiyat">80₺</span>
                 </div>
                 <div class="menu-item">
                     <div class="item-info">
-                        <span class="item-name">Espresso</span>
+                        <span class="item-name" data-key="sicak_18_ad">Espresso</span>
                     </div>
-                    <span class="item-price">100₺</span>
+                    <span class="item-price" data-key="sicak_18_fiyat">100₺</span>
                 </div>
             </div>
         </section>
 
         <!-- SOĞUK İÇECEKLER -->
         <section id="soguk-icecekler" class="category-section">
-            <h2 class="category-title"><i class="fa-solid fa-glass-water"></i> Soğuk İçecekler</h2>
+            <h2 class="category-title"><i class="fa-solid fa-glass-water"></i> <span data-key="kat_soguk_baslik">Soğuk İçecekler</span></h2>
             <div class="menu-list">
                 <div class="menu-item">
                     <div class="item-info">
-                        <span class="item-name">Su</span>
+                        <span class="item-name" data-key="soguk_01_ad">Su</span>
                     </div>
-                    <span class="item-price">20₺</span>
+                    <span class="item-price" data-key="soguk_01_fiyat">20₺</span>
                 </div>
                 <div class="menu-item">
                     <div class="item-info">
-                        <span class="item-name">Ayran</span>
+                        <span class="item-name" data-key="soguk_02_ad">Ayran</span>
                     </div>
-                    <span class="item-price">40₺</span>
+                    <span class="item-price" data-key="soguk_02_fiyat">40₺</span>
                 </div>
                 <div class="menu-item">
                     <div class="item-info">
-                        <span class="item-name">Gazoz</span>
+                        <span class="item-name" data-key="soguk_03_ad">Gazoz</span>
                     </div>
-                    <span class="item-price">50₺</span>
+                    <span class="item-price" data-key="soguk_03_fiyat">50₺</span>
                 </div>
                 <div class="menu-item">
                     <div class="item-info">
-                        <span class="item-name">Soda</span>
+                        <span class="item-name" data-key="soguk_04_ad">Soda</span>
                     </div>
-                    <span class="item-price">50₺</span>
+                    <span class="item-price" data-key="soguk_04_fiyat">50₺</span>
                 </div>
                 <div class="menu-item">
                     <div class="item-info">
-                        <span class="item-name">Coca Cola Cam</span>
+                        <span class="item-name" data-key="soguk_05_ad">Coca Cola Cam</span>
                     </div>
-                    <span class="item-price">80₺</span>
+                    <span class="item-price" data-key="soguk_05_fiyat">80₺</span>
                 </div>
                 <div class="menu-item">
                     <div class="item-info">
-                        <span class="item-name">Fanta Cam</span>
+                        <span class="item-name" data-key="soguk_06_ad">Fanta Cam</span>
                     </div>
-                    <span class="item-price">80₺</span>
+                    <span class="item-price" data-key="soguk_06_fiyat">80₺</span>
                 </div>
                 <div class="menu-item">
                     <div class="item-info">
-                        <span class="item-name">Şalgam</span>
+                        <span class="item-name" data-key="soguk_07_ad">Şalgam</span>
                     </div>
-                    <span class="item-price">60₺</span>
+                    <span class="item-price" data-key="soguk_07_fiyat">60₺</span>
                 </div>
                 <div class="menu-item">
                     <div class="item-info">
-                        <span class="item-name">Avşar Meyveli Soda</span>
+                        <span class="item-name" data-key="soguk_08_ad">Avşar Meyveli Soda</span>
                     </div>
-                    <span class="item-price">75₺</span>
+                    <span class="item-price" data-key="soguk_08_fiyat">75₺</span>
                 </div>
                 <div class="menu-item">
                     <div class="item-info">
-                        <span class="item-name">Cappy Kutu</span>
+                        <span class="item-name" data-key="soguk_09_ad">Cappy Kutu</span>
                     </div>
-                    <span class="item-price">100₺</span>
+                    <span class="item-price" data-key="soguk_09_fiyat">100₺</span>
                 </div>
                 <div class="menu-item">
                     <div class="item-info">
-                        <span class="item-name">Churchill</span>
+                        <span class="item-name" data-key="soguk_10_ad">Churchill</span>
                     </div>
-                    <span class="item-price">80₺</span>
+                    <span class="item-price" data-key="soguk_10_fiyat">80₺</span>
                 </div>
                 <div class="menu-item">
                     <div class="item-info">
-                        <span class="item-name">Coca Cola Kutu</span>
+                        <span class="item-name" data-key="soguk_11_ad">Coca Cola Kutu</span>
                     </div>
-                    <span class="item-price">100₺</span>
+                    <span class="item-price" data-key="soguk_11_fiyat">100₺</span>
                 </div>
                 <div class="menu-item">
                     <div class="item-info">
-                        <span class="item-name">Fuse Tea Kutu</span>
+                        <span class="item-name" data-key="soguk_12_ad">Fuse Tea Kutu</span>
                     </div>
-                    <span class="item-price">100₺</span>
+                    <span class="item-price" data-key="soguk_12_fiyat">100₺</span>
                 </div>
                 <div class="menu-item">
                     <div class="item-info">
-                        <span class="item-name">Sprite Kutu</span>
+                        <span class="item-name" data-key="soguk_13_ad">Sprite Kutu</span>
                     </div>
-                    <span class="item-price">100₺</span>
+                    <span class="item-price" data-key="soguk_13_fiyat">100₺</span>
                 </div>
                 <div class="menu-item">
                     <div class="item-info">
-                        <span class="item-name">Limonata</span>
+                        <span class="item-name" data-key="soguk_14_ad">Limonata</span>
                     </div>
-                    <span class="item-price">100₺</span>
+                    <span class="item-price" data-key="soguk_14_fiyat">100₺</span>
                 </div>
                 <div class="menu-item">
                     <div class="item-info">
-                        <span class="item-name">Sıkma Portakal</span>
+                        <span class="item-name" data-key="soguk_15_ad">Sıkma Portakal</span>
                     </div>
-                    <span class="item-price">100₺</span>
+                    <span class="item-price" data-key="soguk_15_fiyat">100₺</span>
                 </div>
                 <div class="menu-item">
                     <div class="item-info">
-                        <span class="item-name">Enerji İçeceği</span>
+                        <span class="item-name" data-key="soguk_16_ad">Enerji İçeceği</span>
                     </div>
-                    <span class="item-price">100₺</span>
+                    <span class="item-price" data-key="soguk_16_fiyat">100₺</span>
                 </div>
                 <div class="menu-item">
                     <div class="item-info">
-                        <span class="item-name">Milkshake</span>
+                        <span class="item-name" data-key="soguk_17_ad">Milkshake</span>
                     </div>
-                    <span class="item-price">120₺</span>
+                    <span class="item-price" data-key="soguk_17_fiyat">120₺</span>
                 </div>
                 <div class="menu-item">
                     <div class="item-info">
-                        <span class="item-name">Frozen</span>
+                        <span class="item-name" data-key="soguk_18_ad">Frozen</span>
                     </div>
-                    <span class="item-price">120₺</span>
+                    <span class="item-price" data-key="soguk_18_fiyat">120₺</span>
                 </div>
                 <div class="menu-item">
                     <div class="item-info">
-                        <span class="item-name">Fındıklı Portakal</span>
+                        <span class="item-name" data-key="soguk_19_ad">Fındıklı Portakal</span>
                     </div>
-                    <span class="item-price">125₺</span>
+                    <span class="item-price" data-key="soguk_19_fiyat">125₺</span>
                 </div>
                 <div class="menu-item">
                     <div class="item-info">
-                        <span class="item-name">Atom</span>
+                        <span class="item-name" data-key="soguk_20_ad">Atom</span>
                     </div>
-                    <span class="item-price">150₺</span>
+                    <span class="item-price" data-key="soguk_20_fiyat">150₺</span>
                 </div>
                 <div class="menu-item">
                     <div class="item-info">
-                        <span class="item-name">Kokteyl</span>
-                        <span class="item-desc">Mekanımıza özel spesiyal karışım</span>
+                        <span class="item-name" data-key="soguk_21_ad">Kokteyl</span>
+                        <span class="item-desc" data-key="soguk_21_aciklama">Mekanımıza özel spesiyal karışım</span>
                     </div>
-                    <span class="item-price">150₺</span>
+                    <span class="item-price" data-key="soguk_21_fiyat">150₺</span>
                 </div>
                 <div class="menu-item">
                     <div class="item-info">
-                        <span class="item-name">Karışık Atom</span>
-                        <span class="item-desc">Taze meyvelerle hazırlanmış enerji deposu</span>
+                        <span class="item-name" data-key="soguk_22_ad">Karışık Atom</span>
+                        <span class="item-desc" data-key="soguk_22_aciklama">Taze meyvelerle hazırlanmış enerji deposu</span>
                     </div>
-                    <span class="item-price">200₺</span>
+                    <span class="item-price" data-key="soguk_22_fiyat">200₺</span>
                 </div>
             </div>
         </section>
 
         <!-- YİYECEKLER -->
         <section id="yiyecekler" class="category-section">
-            <h2 class="category-title"><i class="fa-solid fa-burger"></i> Yiyecekler</h2>
+            <h2 class="category-title"><i class="fa-solid fa-burger"></i> <span data-key="kat_yiyecek_baslik">Yiyecekler</span></h2>
             <div class="menu-list">
                 <div class="menu-item">
                     <div class="item-info">
-                        <span class="item-name">Zirve Tabak</span>
-                        <span class="item-desc">Patates kızartması, soğan halkası ve soslar</span>
+                        <span class="item-name" data-key="yiyecek_01_ad">Zirve Tabak</span>
+                        <span class="item-desc" data-key="yiyecek_01_aciklama">Patates kızartması, soğan halkası ve soslar</span>
                     </div>
-                    <span class="item-price">150₺</span>
+                    <span class="item-price" data-key="yiyecek_01_fiyat">150₺</span>
                 </div>
                 <div class="menu-item">
                     <div class="item-info">
-                        <span class="item-name">Izgara Köfte</span>
+                        <span class="item-name" data-key="yiyecek_02_ad">Izgara Köfte</span>
                     </div>
-                    <span class="item-price">275₺</span>
+                    <span class="item-price" data-key="yiyecek_02_fiyat">275₺</span>
                 </div>
                 <div class="menu-item">
                     <div class="item-info">
-                        <span class="item-name">Pizza</span>
+                        <span class="item-name" data-key="yiyecek_03_ad">Pizza</span>
                     </div>
-                    <span class="item-price">250₺</span>
+                    <span class="item-price" data-key="yiyecek_03_fiyat">250₺</span>
                 </div>
                 <div class="menu-item">
                     <div class="item-info">
-                        <span class="item-name">Hamburger</span>
-                        <span class="item-desc">Özel ekmeği ve enfes sosuyla, yanında patates kızartması</span>
+                        <span class="item-name" data-key="yiyecek_04_ad">Hamburger</span>
+                        <span class="item-desc" data-key="yiyecek_04_aciklama">Özel ekmeği ve enfes sosuyla, yanında patates kızartması</span>
                     </div>
-                    <span class="item-price">250₺</span>
+                    <span class="item-price" data-key="yiyecek_04_fiyat">250₺</span>
                 </div>
                 <div class="menu-item">
                     <div class="item-info">
-                        <span class="item-name">Kaşarlı Tost</span>
+                        <span class="item-name" data-key="yiyecek_05_ad">Kaşarlı Tost</span>
                     </div>
-                    <span class="item-price">150₺</span>
+                    <span class="item-price" data-key="yiyecek_05_fiyat">150₺</span>
                 </div>
                 <div class="menu-item">
                     <div class="item-info">
-                        <span class="item-name">Sucuklu Tost</span>
+                        <span class="item-name" data-key="yiyecek_06_ad">Sucuklu Tost</span>
                     </div>
-                    <span class="item-price">150₺</span>
+                    <span class="item-price" data-key="yiyecek_06_fiyat">150₺</span>
                 </div>
                 <div class="menu-item">
                     <div class="item-info">
-                        <span class="item-name">Karışık Tost</span>
-                        
+                        <span class="item-name" data-key="yiyecek_07_ad">Karışık Tost</span>
+
                     </div>
-                    <span class="item-price">200₺</span>
+                    <span class="item-price" data-key="yiyecek_07_fiyat">200₺</span>
                 </div>
-                
+
                 <div class="menu-item">
                     <div class="item-info">
-                        <span class="item-name">Atıştırmalık</span>
+                        <span class="item-name" data-key="yiyecek_08_ad">Atıştırmalık</span>
                     </div>
-                    <span class="item-price">50₺</span>
-                </div>
-                <div class="menu-item">
-                    <div class="item-info">
-                        <span class="item-name">Dondurma</span>
-                    </div>
-                    <span class="item-price">70₺</span>
+                    <span class="item-price" data-key="yiyecek_08_fiyat">50₺</span>
                 </div>
                 <div class="menu-item">
                     <div class="item-info">
-                        <span class="item-name">Karışık Çerez</span>
-                        
+                        <span class="item-name" data-key="yiyecek_09_ad">Dondurma</span>
                     </div>
-                    <span class="item-price">180₺</span>
+                    <span class="item-price" data-key="yiyecek_09_fiyat">70₺</span>
                 </div>
-                
                 <div class="menu-item">
                     <div class="item-info">
-                        <span class="item-name">Sigara Böreği</span>
+                        <span class="item-name" data-key="yiyecek_10_ad">Karışık Çerez</span>
+
                     </div>
-                    <span class="item-price">140₺</span>
+                    <span class="item-price" data-key="yiyecek_10_fiyat">180₺</span>
                 </div>
-                
-                
-                
-                
+
+                <div class="menu-item">
+                    <div class="item-info">
+                        <span class="item-name" data-key="yiyecek_11_ad">Sigara Böreği</span>
+                    </div>
+                    <span class="item-price" data-key="yiyecek_11_fiyat">140₺</span>
+                </div>
+
+
+
+
             </div>
         </section>
 
         <!-- TATLILAR -->
         <section id="tatlilar" class="category-section">
-            <h2 class="category-title"><i class="fa-solid fa-cake-candles"></i> Tatlılar</h2>
+            <h2 class="category-title"><i class="fa-solid fa-cake-candles"></i> <span data-key="kat_tatli_baslik">Tatlılar</span></h2>
             <div class="menu-list">
                 <div class="menu-item">
                     <div class="item-info">
-                        <span class="item-name">Fıstık Rüyası</span>
+                        <span class="item-name" data-key="tatli_01_ad">Fıstık Rüyası</span>
                     </div>
-                    <span class="item-price">200₺</span>
+                    <span class="item-price" data-key="tatli_01_fiyat">200₺</span>
                 </div>
                 <div class="menu-item">
                     <div class="item-info">
-                        <span class="item-name">Çikolatalı Orman Meyveli Pasta</span>
+                        <span class="item-name" data-key="tatli_02_ad">Çikolatalı Orman Meyveli Pasta</span>
                     </div>
-                    <span class="item-price">200₺</span>
+                    <span class="item-price" data-key="tatli_02_fiyat">200₺</span>
                 </div>
                 <div class="menu-item">
                     <div class="item-info">
-                        <span class="item-name">Lotus</span>
+                        <span class="item-name" data-key="tatli_03_ad">Lotus</span>
                     </div>
-                    <span class="item-price">200₺</span>
+                    <span class="item-price" data-key="tatli_03_fiyat">200₺</span>
                 </div>
                 <div class="menu-item">
                     <div class="item-info">
-                        <span class="item-name">Biscoff Bella Cocostar</span>
+                        <span class="item-name" data-key="tatli_04_ad">Biscoff Bella Cocostar</span>
                     </div>
-                    <span class="item-price">200₺</span>
+                    <span class="item-price" data-key="tatli_04_fiyat">200₺</span>
                 </div>
             </div>
         </section>
 
     </main>
-    
+
     <a href="#" class="fab-button" aria-label="Yukarı Çık">
         <i class="fa-solid fa-chevron-up"></i>
     </a>
@@ -622,16 +634,16 @@
         const sections = document.querySelectorAll('.category-section');
 
         navBtns.forEach(btn => {
-            btn.addEventListener('click', function(e) {
+            btn.addEventListener('click', function (e) {
                 e.preventDefault();
                 const targetId = this.getAttribute('data-target');
                 const targetSection = document.getElementById(targetId);
-                
+
                 window.scrollTo({
                     top: targetSection.offsetTop - 80,
                     behavior: 'smooth'
                 });
-                
+
                 this.scrollIntoView({ behavior: 'smooth', inline: 'center', block: 'nearest' });
             });
         });
@@ -653,6 +665,193 @@
                 }
             });
         });
+
+        // Dinamik İçerik Yönetimi (localStorage Önbellek + Güvenli DOM Güncelleme)
+        (function () {
+            'use strict';
+
+            const CACHE_STORAGE_KEY = 'zirve_lounge_icerik_cache_v1';
+            const COLOR_CSS_VARS = {
+                renk_arkaplan: '--bg-body',
+                renk_header: '--bg-header',
+                renk_kart: '--card-bg',
+                renk_metin: '--text-main',
+                renk_metin_ikincil: '--text-muted',
+                renk_vurgu: '--accent-burgundy',
+                renk_altin: '--accent-gold'
+            };
+
+            function isPlainObject(value) {
+                return value !== null && typeof value === 'object' && !Array.isArray(value);
+            }
+
+            function isSafeUrl(rawUrl, allowContactSchemes) {
+                if (typeof rawUrl !== 'string') {
+                    return false;
+                }
+                const trimmed = rawUrl.trim();
+                if (!trimmed || /[\u0000-\u001F\u007F]/.test(trimmed) || trimmed.startsWith('//')) {
+                    return false;
+                }
+                if (allowContactSchemes && trimmed.startsWith('#')) {
+                    return true;
+                }
+                const schemeMatch = /^([a-zA-Z][a-zA-Z0-9+.-]*):/.exec(trimmed);
+                if (!schemeMatch) {
+                    const firstSegment = trimmed.split(/[/?#]/)[0];
+                    return firstSegment.indexOf(':') === -1;
+                }
+                const scheme = schemeMatch[1].toLowerCase() + ':';
+                const allowed = allowContactSchemes
+                    ? ['http:', 'https:', 'tel:', 'mailto:']
+                    : ['http:', 'https:'];
+                return allowed.includes(scheme);
+            }
+
+            function applyContent(data) {
+                if (!isPlainObject(data)) {
+                    return;
+                }
+
+                // CSS Tema Renklerini Doğrulanmış Hex Kodlarıyla Güncelle
+                Object.keys(COLOR_CSS_VARS).forEach(function (colorKey) {
+                    if (!Object.prototype.hasOwnProperty.call(data, colorKey)) {
+                        return;
+                    }
+                    const colorVal = data[colorKey];
+                    if (typeof colorVal === 'string' && /^#([0-9a-fA-F]{3}|[0-9a-fA-F]{6})$/.test(colorVal.trim())) {
+                        document.documentElement.style.setProperty(COLOR_CSS_VARS[colorKey], colorVal.trim());
+                    }
+                });
+
+                // data-key Taşıyan Tüm Elementleri XSS'e Karşı Güvenli Şekilde Doldur
+                document.querySelectorAll('[data-key]').forEach(function (el) {
+                    const key = el.getAttribute('data-key');
+                    if (!key || !Object.prototype.hasOwnProperty.call(data, key)) {
+                        return;
+                    }
+                    const val = data[key];
+                    if (typeof val !== 'string') {
+                        return;
+                    }
+
+                    const tag = el.tagName;
+                    if (tag === 'TITLE') {
+                        if (val.trim() !== '') {
+                            document.title = val;
+                        }
+                        return;
+                    }
+
+                    if (tag === 'IMG') {
+                        if (isSafeUrl(val, false)) {
+                            el.setAttribute('src', val.trim());
+                        }
+                        const altKey = el.dataset.altKey;
+                        if (altKey && Object.prototype.hasOwnProperty.call(data, altKey) && typeof data[altKey] === 'string') {
+                            el.setAttribute('alt', data[altKey]);
+                        }
+                        return;
+                    }
+
+                    if (tag === 'LINK') {
+                        if (isSafeUrl(val, false)) {
+                            el.setAttribute('href', val.trim());
+                        }
+                        return;
+                    }
+
+                    if (tag === 'A') {
+                        if (el.dataset.attr === 'text') {
+                            el.textContent = val;
+                        } else if (isSafeUrl(val, true)) {
+                            el.setAttribute('href', val.trim());
+                        }
+                        const textKey = el.dataset.textKey;
+                        if (textKey && Object.prototype.hasOwnProperty.call(data, textKey) && typeof data[textKey] === 'string') {
+                            el.textContent = data[textKey];
+                        }
+                        return;
+                    }
+
+                    if (tag === 'META') {
+                        el.setAttribute('content', val);
+                        return;
+                    }
+
+                    el.textContent = val;
+                    if (el.classList.contains('item-desc')) {
+                        el.style.display = val.trim() === '' ? 'none' : '';
+                    }
+                });
+            }
+
+            function readCache() {
+                try {
+                    const raw = window.localStorage.getItem(CACHE_STORAGE_KEY);
+                    if (!raw) {
+                        return null;
+                    }
+                    const parsed = JSON.parse(raw);
+                    return isPlainObject(parsed) ? parsed : null;
+                } catch (err) {
+                    return null;
+                }
+            }
+
+            function writeCache(data) {
+                try {
+                    window.localStorage.setItem(CACHE_STORAGE_KEY, JSON.stringify(data));
+                } catch (err) {
+                    // Gizli sekme veya depolama sınırı durumunda sessizce geç
+                }
+            }
+
+            async function loadDynamicContent() {
+                const cached = readCache();
+                if (cached) {
+                    applyContent(cached);
+                }
+
+                if (typeof ICERIK_API_URL !== 'string' || !ICERIK_API_URL.trim()) {
+                    return;
+                }
+
+                const controller = typeof AbortController === 'function' ? new AbortController() : null;
+                const timeoutId = controller ? window.setTimeout(function () { controller.abort(); }, 6000) : null;
+
+                try {
+                    const response = await fetch(ICERIK_API_URL.trim(), {
+                        method: 'GET',
+                        mode: 'cors',
+                        headers: { Accept: 'application/json' },
+                        signal: controller ? controller.signal : undefined
+                    });
+
+                    if (!response.ok) {
+                        throw new Error('HTTP ' + response.status);
+                    }
+
+                    const freshData = await response.json();
+                    if (!isPlainObject(freshData)) {
+                        throw new Error('Geçersiz JSON yapısı');
+                    }
+
+                    applyContent(freshData);
+                    writeCache(freshData);
+                } catch (err) {
+                    // API erişilemezse önbellek veya HTML içindeki varsayılan içerikler korunur
+                    console.warn('Dinamik içerik yüklenemedi, varsayılan içerik gösteriliyor:', err);
+                } finally {
+                    if (timeoutId !== null) {
+                        window.clearTimeout(timeoutId);
+                    }
+                }
+            }
+
+            loadDynamicContent();
+        })();
     </script>
 </body>
+
 </html>
